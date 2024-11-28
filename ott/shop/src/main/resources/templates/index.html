@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+    <style>
+ul {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-around;
+
+}
+ul > div {
+margin-top : 54px;
+}
+        .my_btn {
+  background-color: white;
+  color: white;
+  border-line: white;
+  padding: 0;
+  margin-top :54px;
+}
+       .my_btn > img{
+        width:500px;
+        height: 350px;
+
+        }
+
+
+    </style>
+</th:block>
+<div layout:fragment="content">
+<div class="section">
+
+    <ul>
+        <form class="form-inline my-2 my-lg-0" th:action="@{/ott}" method="get">
+            <input name="searchQuery" class="form-control mr-sm-2" type="search" placeholder="Search"
+                   aria-label="Search" value="netflix" style="display:none;">
+            <input name="searchText" class="form-control" type="searchText"  placeholder="SearchText"
+                   aria-label="SearchText" value="netflix" style="display:none;">
+            <button class='my_btn' type="submit" >
+                    <img src="/img/netflix.jpg"  alt="...">
+            </button>
+        </form>
+        <form class="form-inline my-2 my-lg-0" th:action="@{/ott}" method="get">
+            <input name="searchQuery" class="form-control mr-sm-0" type="search" placeholder="Search"
+                   aria-label="Search" value="wavve" style="display:none;">
+            <input name="searchText" class="form-control" type="searchText"  placeholder="SearchText"
+                   aria-label="SearchText" value="wavve" style="display:none;">
+            <button class='my_btn' type="submit" >
+            <img src="/img/wavve.jpg" class="card-img-top" alt="wavve">
+            </button>
+        </form>
+        <form class="form-inline my-2 my-lg-0" th:action="@{/ott}" method="get">
+            <input name="searchQuery" class="form-control mr-sm-0" type="search" placeholder="Search"
+                   aria-label="Search" value="tving" style="display:none;">
+            <input name="searchText" class="form-control" type="searchText"  placeholder="SearchText"
+                   aria-label="SearchText" value="tving" style="display:none;">
+            <button class='my_btn' type="submit" >
+                <img src="/img/tving.jpg" class="card-img-top" alt="tving">
+            </button>
+        </form>
+
+        <form class="form-inline my-2 my-lg-0" th:action="@{/ott}" method="get">
+            <input name="searchQuery" class="form-control mr-sm-0" type="search" placeholder="Search"
+                   aria-label="Search" value="disney" style="display:none;">
+            <input name="searchText" class="form-control" type="searchText"  placeholder="SearchText"
+                   aria-label="SearchText" value="disney" style="display:none;">
+            <button class='my_btn' type="submit" >
+            <img src="/img/disneyplus.jpg" class="card-img-top" alt="...">
+            </button>
+        </form>
+        <form class="form-inline my-2 my-lg-0" th:action="@{/ott}" method="get">
+            <input name="searchQuery" class="form-control mr-sm-0" type="search" placeholder="Search"
+                   aria-label="Search" value="tv " style="display:none;">
+            <input name="searchText" class="form-control" type="searchText"  placeholder="SearchText"
+                   aria-label="SearchText" value="tv " style="display:none;">
+            <button class='my_btn' type="submit" >
+                <img src="/img/tv.jpg" class="card-img-top" alt="...">
+            </button>
+        </form>
+        <form class="form-inline my-2 my-lg-0" th:action="@{/ott}" method="get">
+            <input name="searchQuery" class="form-control mr-sm-0" type="search" placeholder="Search"
+                   aria-label="Search" value="movie" style="display:none;">
+            <input name="searchText" class="form-control" type="searchText"  placeholder="SearchText"
+                   aria-label="SearchText" value="movie" style="display:none;">
+            <button class='my_btn' type="submit" >
+                <img src="/img/movie.jpg" class="card-img-top" alt="...">
+            </button>
+        </form>
+
+    </ul>
+</div>
+</div>
+
+</html>

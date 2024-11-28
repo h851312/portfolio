@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 상세 페이지</title>
+    <!-- 부트스트랩 CSS 추가 -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 사용자 CSS 추가 -->
+    <style>
+        .content-container {
+            margin-top: 30px;
+        }
+        .content-box {
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .comment-form {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .comment-form textarea {
+            resize: none;
+        }
+            th,td{
+        text-align:center;
+        }
+        .title{
+        text-align:left;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container content-container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <h5 th:text="'제목 : ' + ${board.title}"></h5>
+                </div>
+                <div>
+                    <p th:text="'작성자 : ' + ${board.modifiedBy}"></p>
+                </div>
+                <h5>내용</h5>
+                <div class="content-box">
+                    <dl>
+                        <dd th:text="${board.content}"></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th width="50%">내용</th>
+                    <th width="15%">작성자</th>
+                    <th width="15%">작성 시간</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="comment : ${comments}">
+                    <td class="title" th:text="${comment.content}"></td>
+                    <td th:text="${comment.created_by}"></td>
+                    <td th:text="${comment.created_date}"></td>
+                </tr>
+                </tbody>
+                <div th:if="${#authentication.name == board.createdBy}">
+                    <div class="btn-group" role="group" aria-label="수정 및 삭제">
+                        <a th:href="@{'/board/update/' + ${board.id}}" class="btn btn-primary">수정</a>
+                        <form th:action="@{'/board/delete/' + ${board.id}}" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-primary">삭제</button>
+                        </form>
+                    </div>
+                </div>
+
+            </table>
+        </div>
+        <form action="boardContent.html" th:action method="post" class="comment-form" sec:authorize="isAuthenticated()">
+            <div class="form-group">
+                <label for="content">댓글 달기</label>
+                <textarea class="form-control" id="content" name="content" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" onclick="window.location.reload()">작성</button>
+        </form>
+    </div>
+</div>
+<!-- 부트스트랩 및 jQuery JS 추가 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

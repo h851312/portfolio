@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:fragment="header">
+    <style>
+        li > a{
+font-size: 2rem;
+margin: 0 20px;
+        }
+
+        .navbar-brand {
+        font-size: 3rem;
+        }
+        button > span{
+        font-size: 2rem;
+        }
+
+        button {margin: 20px;}
+<!--        button {-->
+<!--        justify-content: space-evenly;-->
+<!--    align-items: center;-->
+<!--        }-->
+
+    </style>
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="/">OVER THE TOP</a>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <button type="button" class="btn btn-primary btn-ghost btn-open-line" th:onclick="|location.href='@{/admin/item/new}'|"sec:authorize="hasAnyAuthority('ROLE_ADMIN')"><span>상품등록</span></button>
+                <button type="button" class="btn btn-primary btn-ghost btn-open-line" th:onclick="|location.href='@{/admin/items}'|"sec:authorize="hasAnyAuthority('ROLE_ADMIN')"><span>상품관리</span></button>
+                <button type="button" class="btn btn-primary btn-ghost btn-open-line" th:onclick="|location.href='@{/member/memberList}'|"sec:authorize="hasAnyAuthority('ROLE_ADMIN')"><span>회원정보</span></button>
+                <li class="nav-item">
+                    <form class="form-inline my-2 my-lg-0" th:action="@{/ott}" method="get">
+                        <input name="searchQuery" class="form-control mr-sm-2" type="search" placeholder="Search"
+                               aria-label="Search" value="netflix" style="display:none;">
+                        <input name="searchText" class="form-control" type="searchText"  placeholder="SearchText"
+                               aria-label="SearchText" value="netflix" style="display:none;">
+                        <button class="btn btn-primary btn-ghost btn-open-line" type="submit"><span>NETFLIX</span></button>
+                    </form>
+                </li>
+
+                <li class="nav-item">
+                    <form class="form-inline my-2 my-lg-0" th:action="@{/ott}" method="get">
+                        <input name="searchQuery" class="form-control mr-sm-0" type="search" placeholder="Search"
+                               aria-label="Search" value="wavve" style="display:none;">
+                        <input name="searchText" class="form-control" type="searchText"  placeholder="SearchText"
+                               aria-label="SearchText" value="wavve" style="display:none;">
+                        <button class="btn btn-primary btn-ghost btn-open-line" type="submit"><span>WAVVE</span></button>
+                    </form>
+                </li>
+                <li class="nav-item" >
+                    <form class="form-inline my-2 my-lg-0" th:action="@{/ott}" method="get">
+                        <input name="searchQuery" class="form-control mr-sm-0" type="search" placeholder="Search"
+                               aria-label="Search" value="tving" style="display:none;">
+                        <input name="searchText" class="form-control" type="searchText"  placeholder="SearchText"
+                               aria-label="SearchText" value="tving" style="display:none;">
+                        <button class="btn btn-primary btn-ghost btn-open-line" type="submit"><span>TVING</span></button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form class="form-inline my-2 my-lg-0" th:action="@{/ott}" method="get">
+                        <input name="searchQuery" class="form-control mr-sm-0" type="search" placeholder="Search"
+                               aria-label="Search" value="disney" style="display:none;">
+                        <input name="searchText" class="form-control" type="searchText"  placeholder="SearchText"
+                               aria-label="SearchText" value="disney+" style="display:none;">
+                        <button class="btn btn-primary btn-ghost btn-open-line" type="submit"><span>Disney+</span></button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form class="form-inline my-2 my-lg-0" th:action="@{/ott}" method="get">
+                        <input name="searchQuery" class="form-control mr-sm-0" type="search" placeholder="Search"
+                               aria-label="Search" value="tv " style="display:none;">
+                        <input name="searchText" class="form-control" type="searchText"  placeholder="SearchText"
+                               aria-label="SearchText" value="tv " style="display:none;">
+                        <button class="btn btn-primary btn-ghost btn-open-line" type="submit"><span>TV</span></button>
+                    </form>
+                </li>
+                <li class="nav-item" >
+                    <form class="form-inline my-2 my-lg-0" th:action="@{/ott}" method="get">
+                        <input name="searchQuery" class="form-control mr-sm-0" type="search" placeholder="Search"
+                               aria-label="Search" value="movie" style="display:none;">
+                        <input name="searchText" class="form-control" type="searchText"  placeholder="SearchText"
+                               aria-label="SearchText" value="movie" style="display:none;">
+                        <button class="btn btn-primary btn-ghost btn-open-line" type="submit"><span>MOVIE</span></button>
+                    </form>
+                </li>
+                <!--sec:authorize="isAuthenticated()- 로그인한 사용자만 보이는 메뉴-->
+                <button type="button" class="btn btn-primary btn-ghost btn-open-line" onclick="location.href='/board/boardList' "sec:authorize="hasAnyAuthority('ROLE_ADMIN')"><span>BOARD</span></button>
+                <button type="button" class="btn btn-primary btn-ghost btn-open-line" onclick="location.href='/cart'"sec:authorize="isAuthenticated()"><span>장바구니</span></button>
+                <button type="button" class="btn btn-primary btn-ghost btn-open-line" onclick="location.href='/orders'"sec:authorize="isAuthenticated()"><span>구매내역</span></button>
+
+                <button type="button" class="btn btn-primary btn-ghost btn-open-line" onclick="location.href='/board/boardList'"sec:authorize="isAuthenticated()"><span>마이페이지</span></button>
+                <button type="button" class="btn btn-primary btn-ghost btn-open-line" onclick="location.href='/logout'" sec:authorize="isAuthenticated()"><span>로그아웃</span></button>
+                <button type="button" class="btn btn-primary btn-ghost btn-open-line" onclick="location.href='/member/memberLoginForm'" sec:authorize="isAnonymous()"><span>로그인</span></button>
+                <button type="button" class="btn btn-primary btn-ghost btn-open-line" onclick="location.href='/member/memberJoinForm'" sec:authorize="isAnonymous()"><span>회원가입</span></button>
+
+            </ul>
+<!--            <form class="form-inline my-2 my-lg-0" th:action="@{/netflix}" method="get">-->
+<!--                <input name="searchQuery" class="form-control mr-sm-2" type="search" placeholder="Search"-->
+<!--                       aria-label="Search" >-->
+<!--                <button class="btn btn-primary btn-ghost btn-open-line" type="submit">Search</button>-->
+<!--            </form>-->
+        </div>
+    </nav>
+</div>
+</html>

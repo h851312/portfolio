@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/layout1}">
+<th:block layout:fragment="script">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script th:inline="javascript">
+    </script>
+</th:block>
+
+<th:block layout:fragment="css">
+    <style>
+         .container-75 {
+            max-width: 75%;
+            margin: 0 auto;
+        }
+        .repImgDiv {
+            width: 150px;
+            height: 150px;
+            overflow: hidden;
+            margin-right: 20px;
+        }
+        .repImg {
+            width: 100%;
+            height: auto;
+        }
+        .order-card {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #e9ecef;
+            border-radius: 0.25rem;
+            background-color: #ffffff;
+        }
+        .order-details {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: auto;
+            text-align: left;
+        }
+        .order-item-info {
+        width: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .order-item-info >div{
+        width: 100px;
+        }
+        .fs-lg {
+            font-size: 1.25rem;
+        }
+        .fs-xl {
+            font-size: 1.5rem;
+        }
+
+
+    </style>
+</th:block>
+
+<div layout:fragment="content" class="content-mg">
+    <div class="container container-75 mt-5">
+        <h2 class="mb-4">구매 이력</h2>
+        <div th:each="order : ${orders.getContent()}">
+            <div class="order-card">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 th:text="${order.orderDate} + ' 주문'"></h4>
+                </div>
+                <div th:each="orderItem : ${order.orderItemDtoList}" class="d-flex mb-3">
+                    <div class="repImgDiv">
+                        <img th:src="${orderItem.imgUrl}" class="rounded repImg" th:alt="${orderItem.itemNm}">
+                    </div>
+                    <div class="order-item-info">
+                        <div class="fs-xl font-weight-bold">
+                            <span th:text="${orderItem.itemCategory}"></span>
+                        </div>
+                        <div class="fs-lg font-weight-bold">
+                            <span th:text="${orderItem.itemNm}"></span>
+                        </div>
+                        <div class="fs-lg font-weight-light text-muted">
+                            <span th:text="${orderItem.orderPrice} + ' 원'"></span>
+                        </div>
+                    </div>
+                    <div class="order-details">
+                        <div class="fs-lg font-weight-light">
+                            <span th:text="${orderItem.itemDetail}"></span>
+                        </div>
+                    </div>
+                        <div class="video">
+                            <a th:href="${orderItem.videoUrl}" target="_blank" class="btn  videoBtn btn-primary mt-2">감상하기</a>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div th:with="start=${(orders.number/maxPage)*maxPage + 1}, end=(${(orders.totalPages == 0) ? 1 : (start + (maxPage - 1) < orders.totalPages ? start + (maxPage - 1) : orders.totalPages)})" >
+        <ul class="pagination justify-content-center">
+
+            <li class="page-item" th:classappend="${orders.number eq 0}?'disabled':''">
+                <a th:href="@{'/orders/' + ${orders.number-1}}" aria-label='Previous' class="page-link">
+                    <span aria-hidden='true'>Previous</span>
+                </a>
+            </li>
+
+            <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${orders.number eq page-1}?'active':''">
+                <a th:href="@{'/orders/' + ${page-1}}" th:inline="text" class="page-link">[[${page}]]</a>
+            </li>
+
+            <li class="page-item" th:classappend="${orders.number+1 ge orders.totalPages}?'disabled':''">
+                <a th:href="@{'/orders/' + ${orders.number+1}}" aria-label='Next' class="page-link">
+                    <span aria-hidden='true'>Next</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
+</div>
+</html>

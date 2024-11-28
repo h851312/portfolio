@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 수정</title>
+</head>
+<body>
+<h1>회원 수정</h1>
+<form action="/member/memberEditForm" method="post">
+    <input type="hidden" name="id" value="${member.id}">
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" value="${member.username}">
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" value="${member.password}">
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="${member.email}">
+    </div>
+
+    <button type="submit">수정</button>
+</form>
+</body>
+</html>

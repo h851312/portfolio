@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</th:block>
+<div layout:fragment="content">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<body class="text-center">
+<main class="form-signin">
+    <form id="signin-box">
+<!--                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+            <label for="username">username</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            <label for="password">Password</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="email" name="email" placeholder="name@example.com">
+            <label for="email">Email</label>
+        </div>
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+    </form>
+    <button class="w-100 btn btn-lg btn-primary" id="btn-save-member">Sign in</button>
+    <button class="w-100 btn btn-secondary btn-lg"
+            onclick="location.href='/index.html'"
+            th:onclick="|location.href='@{/index}'|"
+            type="button">취소</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2024</p>
+
+</main>
+<script src="/js/member.js"></script>
+</body>
+</div>
+</html>
